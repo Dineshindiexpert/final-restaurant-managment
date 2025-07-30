@@ -32,6 +32,8 @@ while True:
     
         else:
             print("Invalid option! Try again.".center(150))
-    except ValueError:
-        print("Please enter a number (1 or 2).".center(150))
+    except Exception  as e:
+        with open("logs/log.txt","a") as file:
+            file.write(f"the error will be{e} in the main file. ")
+            print("Please enter a number (1 or 2).".center(150))
      
