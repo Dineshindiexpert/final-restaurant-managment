@@ -21,7 +21,8 @@ class Table:
             with open(file_name, 'r') as f:
                 return json.load(f)
         except (json.JSONDecodeError, IOError) as e:
-            log.error_log(f"Error loading {file_name}: {e}")
+            showeror=" in the load_table in the class :- Table on table.py"
+            log.error_log(f"Error loading {file_name}: {e}",showeror)
             return []
 
     def save_data(self, data, file_name):
@@ -30,7 +31,8 @@ class Table:
             with open(file_name, 'w') as f:
                 json.dump(data, f, indent=4)
         except IOError as e:
-            log.error_log(f"Error saving to {file_name}: {e}")
+            showerro="in the save table fun is :- save_table() in the Table class. on table.py"
+            log.error_log(f"Error saving to {file_name}: {e}",showerro)
 
     def book_table_for_persons(self):
         try:
@@ -40,7 +42,8 @@ class Table:
                 print("Duration must be between 1 and 3 hours.")
                 return
         except ValueError as e:
-            log.error_log(e)
+            showerror="on the book_table_for_persons in the Table class on table.py "
+            log.error_log(e,showerror)
             print("Invalid input. Please enter valid numbers.")
             return
 
@@ -93,7 +96,8 @@ class Table:
                 self.save_data(updated, self.booking_file)
                 print(f"Booking for Table {table_no} canceled.")
         except Exception as e:
-            log.error_log(e)
+            showerror="on the cancel table in tabale.py on the Table class."
+            log.error_log(e,showerror)
             print("Error canceling the table booking.")
 
     def show_table_status(self):
@@ -121,7 +125,9 @@ class Table:
     def fetch_tables_by_seats(self):
         try:
             persons = int(input("Enter number of persons: ").strip())
-        except ValueError:
+        except ValueError as e:
+            showerror="in the fetch_tables_by_seats"
+            log.error_log(e,showerror)
             print("Please enter a valid number.")
             return
 

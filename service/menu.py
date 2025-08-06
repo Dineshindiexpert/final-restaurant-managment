@@ -1,5 +1,6 @@
 import json
 import os
+from logs import log
 
 class MenuManager:
     def __init__(self, menu_file='database/menu.json'):
@@ -15,7 +16,9 @@ class MenuManager:
             with open(self.menu_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except (json.JSONDecodeError, IOError) as e:
-            print(f"Error loading menu: {e}")
+            showeror="on the load_menu()in the class MenuManager on the menu.py"
+            log.error_log(e,showeror)
+            print(f"Error loading menu !")
             return []
 
     def save_menu(self, menu):
@@ -24,14 +27,14 @@ class MenuManager:
             with open(self.menu_file, 'w', encoding='utf-8') as f:
                 json.dump(menu, f, indent=4)
         except Exception as e:
-            print(f"Error saving menu: {e}")
+            showerror="on the save_ORDERS() IN THE CLASS MenuManager on menu.py"
+            log.error_log(e,showerror)
+            print(f"Error saving menu !")
 
-     
     def list_dishes(self):
         """Print and return the list of dishes from the menu."""
         try:
-            with open(self.menu_file, 'r') as file:
-                menu_data = json.load(file)
+            menu_data = self.load_menu()
 
             if not menu_data:
                 print("Menu is empty.")
@@ -79,25 +82,34 @@ class MenuManager:
             return dishes
 
         except (FileNotFoundError, json.JSONDecodeError) as e:
+            showerror="on the list_dish() on menu.py"
+            log.error_log(e,showerror)
             print(f"Error reading menu: {e}")
             return []
 
-
     def add_dish(self, name, category, half_price, full_price, description):
-        """Add a new dish to the menu."""
+        """Add a new dish to the menu with validation."""
         try:
+            # Ensure prices are valid numbers
             half_price = float(half_price)
             full_price = float(full_price)
-        except Exception:
+
+            if half_price <= 0 or full_price <= 0:
+                print("Price values must be greater than zero.")
+                return
+
+        except ValueError:
+            log.error_log("Invalid price value entered.")
             print("Invalid price value. Please enter numeric values for prices.")
             return
 
-        if half_price <= 0 or full_price <= 0:
-            print("Price values must be greater than zero.")
+        if not name or not category or not description:
+            print("Dish name, category, and description cannot be empty.")
             return
 
         menu = self.load_menu()
 
+        # Check if the dish already exists in the menu
         for dish in menu:
             if dish['name'].lower() == name.lower():
                 print(f"Dish '{name}' already exists.")
@@ -115,12 +127,23 @@ class MenuManager:
         print(f"Dish '{name}' added to the menu.")
 
     def delete_dish(self, name):
-        """Delete a dish from the menu by its name."""
+        """Delete a dish from the menu by its name with validation."""
+        if not name:
+            print("Dish name cannot be empty.")
+            return
+
         menu = self.load_menu()
+        dish_found = False
+
+        # Check if the dish exists in the menu and delete it
         for dish in menu:
             if dish['name'].lower() == name.lower():
                 menu.remove(dish)
                 self.save_menu(menu)
                 print(f"Dish '{name}' deleted from the menu.")
-                return
-        print(f"Dish '{name}' not found in the menu.")
+                dish_found = True
+                break
+
+        if not dish_found:
+            print(f"Dish '{name}' not found in the menu.")
+

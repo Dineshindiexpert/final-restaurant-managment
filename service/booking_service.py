@@ -1,8 +1,9 @@
 import json
 import os
-from service.menu import MenuManager
 from datetime import datetime
+from service.menu import MenuManager
 from logs import log
+
 
 class Orders:
     def __init__(self, orders_file='database/currentorders.json', previous_orders_file='database/previousorders.json', menu_file='database/menu.json'):
@@ -10,46 +11,44 @@ class Orders:
         self.previous_orders_file = previous_orders_file
         self.menu_file = menu_file
 
-        # Ensure the orders file exists
         self._ensure_file_exists(self.orders_file)
         self._ensure_file_exists(self.previous_orders_file)
 
     def _ensure_file_exists(self, file_name):
-        """ Ensure the file exists, create if it doesn't """
         if not os.path.exists(file_name):
             with open(file_name, 'w') as file:
                 json.dump([], file, indent=4)
 
     def load_menu(self):
-        """ Load the menu from the menu file """
         try:
             with open(self.menu_file, 'r') as file:
                 return json.load(file)
         except Exception as e:
-            print(f"Error loading menu: {e}")
+            showerror="on the load menu fun class is orders on the booking_service.py"
+            log.error_log(e,showerror)
+            print(f"Error loading menu !")
             return []
 
     def load_orders(self, file_name):
-        """ Load orders from a given file """
         try:
             with open(file_name, 'r') as file:
                 return json.load(file)
         except (json.JSONDecodeError, IOError) as e:
-            log.error_log(e)
+            showerror="on the load_orders in the class orders on the booking_service.py"
+            log.error_log(e,showerror)
             print(f"Error loading orders from {file_name}.")
             return []
 
     def save_orders(self, orders, file_name):
-        """ Save orders to a file """
         try:
             with open(file_name, 'w') as file:
                 json.dump(orders, file, indent=4)
         except IOError as e:
-            log.error_log(e)
+            showerror="on the save_orders() in the orders class on the booking_service.py"
+            log.error_log(e,showerror)
             print(f"Error saving orders to {file_name}: {e}")
 
     def move_order_to_previous(self, order_id):
-        """ Move a completed order from current orders to previous orders """
         current_orders = self.load_orders(self.orders_file)
         previous_orders = self.load_orders(self.previous_orders_file)
 
@@ -68,28 +67,70 @@ class Orders:
         else:
             print(f"No such order found with ID {order_id}.")
 
+    def update_report(self, order_data):
+        report_path = 'database/reports.json'
+
+        # Create report if it doesn't exist
+        if not os.path.exists(report_path):
+            report_data = {"total_sales": 0, "most_sold_dishes": {}}
+        else:
+            try:
+                with open(report_path, 'r') as f:
+                    report_data = json.load(f)
+            except json.JSONDecodeError:
+                report_data = {"total_sales": 0, "most_sold_dishes": {}}
+
+        # Update total sales
+        report_data["total_sales"] += order_data["total_price"]
+
+        # Update most sold dishes
+        for item in order_data["items"]:
+            dish = item["dish"]
+            qty = item["quantity"]
+            report_data["most_sold_dishes"][dish] = report_data["most_sold_dishes"].get(dish, 0) + qty
+
+        # Save updated report
+        with open(report_path, 'w') as f:
+            json.dump(report_data, f, indent=4)
+
+        print("Report updated successfully.")
+
     def process_payment(self, order_id):
-        """ Process payment for an order and move it to previous orders """
         current_orders = self.load_orders(self.orders_file)
 
         order_to_process = None
         for order in current_orders:
-            if order['order_id'] == order_id:
+            if order['order_id'] == order_id or order['mobile'] == order_id:
                 if order['status'] == 'completed':
-                    print(f"Order {order_id} has already been paid for.")
+                    print(f" Order {order['order_id']} has already been paid.")
                     return
                 order_to_process = order
                 break
 
-        if order_to_process:
-            print(f"Processing payment for Order {order_id}...")
-            order_to_process['status'] = 'completed'
-            self.move_order_to_previous(order_id)
-        else:
-            print(f"Order ID {order_id} not found in current orders.")
+        if not order_to_process:
+            print(f" Order ID or mobile number '{order_id}' not found.")
+            return
+
+        self.generate_receipt(order_to_process)
+
+        try:
+            amount_input = input(f"\nEnter payment amount (₹{order_to_process['total_price']:.2f}): ₹").strip()
+            amount = float(amount_input)
+            if amount != order_to_process['total_price']:
+                print(" Incorrect amount. Payment failed.")
+                return
+        except ValueError:
+            print(" Invalid amount. Payment must be a number.")
+            return
+
+        order_to_process['status'] = 'completed'
+        self.save_orders(current_orders, self.orders_file)
+        self.move_order_to_previous(order_to_process['order_id'])
+        self.update_report(order_to_process)
+
+        print(" Payment successful and report updated.")
 
     def take_order(self):
-        """ Take a new order, generate an order ID, and print the bill """
         menu_manager = MenuManager()
         menu = menu_manager.list_dishes()
 
@@ -106,10 +147,7 @@ class Orders:
 
         while True:
             dish_name = input("Enter Dish Name: ").strip()
-            dish_entry = next(
-                (item for item in menu if item.get('name', '').lower() == dish_name.lower()),
-                None
-            )
+            dish_entry = next((item for item in menu if item.get('name', '').lower() == dish_name.lower()), None)
 
             if not dish_entry:
                 print(f"Dish '{dish_name}' not found in the menu.")
@@ -130,7 +168,8 @@ class Orders:
                     print("Quantity must be greater than zero.")
                     continue
             except Exception as e:
-                log.error_log(e)
+                showerror="on the booking_error/take_orders() in the orders class."
+                log.error_log(e,showerror)
                 print("Invalid quantity. Please enter a valid number.")
                 continue
 
@@ -149,16 +188,13 @@ class Orders:
             print("No items were added to the order.")
             return
 
-        # Generate order ID
         orders = self.load_orders(self.orders_file)
         next_id = f"O{len(orders) + 1:03d}"
 
-        # Calculate totals
         base_total = sum(item["price"] * item["quantity"] for item in order_items)
-        gst = base_total * 0.18  # 18% GST
+        gst = base_total * 0.18
         total_price = base_total + gst
 
-        # Save the new order
         order_data = {
             "order_id": next_id,
             "mobile": mobile,
@@ -172,12 +208,9 @@ class Orders:
 
         orders.append(order_data)
         self.save_orders(orders, self.orders_file)
-
-        # Generate and print receipt
         self.generate_receipt(order_data)
 
     def cancel_order(self, identifier):
-        """ Cancel an order by order ID or mobile number """
         orders = self.load_orders(self.orders_file)
         found = False
 
@@ -197,51 +230,46 @@ class Orders:
 
         self.save_orders(orders, self.orders_file)
 
-    def view_orders(self):
-        """ Display the list of current orders """
-        orders = self.load_orders(self.orders_file)
+        def view_orders(self):
+            orders = self.load_orders(self.orders_file)
 
-        if not orders:
-            print("No orders to display.")
-            return
+            if not orders:
+                print("No orders to display.")
+                return
 
-        # Define column widths
-        order_id_width = 10
-        mobile_width = 12
-        status_width = 10
-        total_width = 10
-        items_label = "Items"
+            order_id_width = 10
+            mobile_width = 12
+            status_width = 10
+            total_width = 12
+            items_label = "Items"
 
-        # Print header
-        print("=" * 150)
-        print(f"{'Order ID':<{order_id_width}} | {'Mobile':<{mobile_width}} | {'Status':<{status_width}} | {'Total':<{total_width}} | {items_label}")
-        print("=" * 150)
+            print("=" * 90)
+            print(f"{'Order ID':<{order_id_width}} | {'Mobile':<{mobile_width}} | {'Status':<{status_width}} | {'Total':<{total_width}} | {items_label}")
+            print("=" * 90)
 
-        for order in orders:
-            # First item line with order details
-            first_item = order['items'][0] if order['items'] else None
-            item_str = f"{first_item['dish']} ({first_item['portion']}) x{first_item['quantity']}" if first_item else "No items"
-            print(f"|| {order['order_id']:<{order_id_width}} | {order['mobile']:<{mobile_width}} | {order['status']:<{status_width}} | ₹{order['total_price']:<{total_width - 1}.2f} | {item_str}")
+            for order in orders:
+                first_item = order['items'][0] if order['items'] else None
+                item_str = f"{first_item['dish']} ({first_item['portion']}) x{first_item['quantity']}" if first_item else "No items"
+                print(f"{order['order_id']:<{order_id_width}} | {order['mobile']:<{mobile_width}} | {order['status']:<{status_width}} | ₹{order['total_price']:<{total_width}.2f} | {item_str}")
 
-            # Print the rest of the items aligned under "Items"
-            for item in order['items'][1:]:
-                indent = ' ' * (order_id_width + mobile_width + status_width + total_width + 13)  # extra for separators and ₹
-                item_str = f"{item['dish']} ({item['portion']}) x{item['quantity']}"
-                print(f"{indent}{item_str}")
+            print("=" * 90)
 
-            print("-" * 150)
-
-    def generate_receipt(self, order_data):
-        """ Generate a formatted receipt for the order """
-        print("\n" + "=" * 45)
-        print(f"{'Apna Restaurant':^45}")
-        print("=" * 45)
-        print(f"Order ID: {order_data['order_id']}")
-        print(f"Mobile: {order_data['mobile']}")
-        print("-" * 45)
-        for item in order_data['items']:
-            print(f"{item['dish']} ({item['portion']}) x{item['quantity']} - ₹{item['price'] * item['quantity']:.2f}")
-        print("-" * 45)
-        print(f"GST (18%): ₹{order_data['gst']:.2f}")
-        print(f"Total Price: ₹{order_data['total_price']:.2f}")
-        print("=" * 45)
+        def generate_receipt(self, order):
+            print("\n" + "="*40)
+            print(f"RECEIPT - Order ID: {order['order_id']}")
+            print(f"Date & Time: {order['datetime']}")
+            print(f"Mobile: {order['mobile']}")
+            print("-"*40)
+            print(f"{'Dish':20} {'Portion':8} {'Qty':4} {'Price':7}")
+            print("-"*40)
+            for item in order['items']:
+                dish = item['dish']
+                portion = item['portion']
+                qty = item['quantity']
+                price = item['price'] * qty
+                print(f"{dish:20} {portion:8} {qty:<4} ₹{price:<7.2f}")
+            print("-"*40)
+            print(f"{'Subtotal':34} ₹{order['base_total']:.2f}")
+            print(f"{'GST (18%)':34} ₹{order['gst']:.2f}")
+            print(f"{'Total':34} ₹{order['total_price']:.2f}")
+            print("="*40 + "\n")

@@ -1,0 +1,214 @@
+{
+  "Pizza": [
+    {
+      "name": "Margherita Pizza",
+      "half_price": 599,
+      "full_price": 899,
+      "description": "Classic pizza with tomato sauce, mozzarella, and basil."
+    },
+    {
+      "name": "Pepperoni Pizza",
+      "half_price": 699,
+      "full_price": 999,
+      "description": "Pizza topped with pepperoni and cheese."
+    }
+  ],
+
+  "Salad": [
+    {
+      "name": "Caesar Salad",
+      "half_price": 449,
+      "full_price": 699,
+      "description": "Romaine lettuce, croutons, parmesan, and Caesar dressing."
+    }
+  ],
+
+  "Pasta": [
+    {
+      "name": "Spaghetti Carbonara",
+      "half_price": 749,
+      "full_price": 1099,
+      "description": "Spaghetti with pancetta, egg, and parmesan."
+    },
+    {
+      "name": "White Sos Pasta",
+      "half_price": 1500,
+      "full_price": 2500,
+      "description": "White sauce pasta with cream and full of taste."
+    }
+  ],
+
+  "Sandwich": [
+    {
+      "name": "Grilled Chicken Sandwich",
+      "half_price": 549,
+      "full_price": 799,
+      "description": "Grilled chicken breast with lettuce and tomato on a bun."
+    }
+  ],
+
+  "Rice": [
+    {
+      "name": "Mushroom Risotto",
+      "half_price": 849,
+      "full_price": 1199,
+      "description": "Creamy risotto with mushrooms and parmesan."
+    }
+  ],
+
+  "Soup": [
+    {
+      "name": "Tomato Soup",
+      "half_price": 299,
+      "full_price": 499,
+      "description": "Rich tomato soup served with bread."
+    }
+  ],
+
+  "Burger": [
+    {
+      "name": "Cheeseburger",
+      "half_price": 599,
+      "full_price": 849,
+      "description": "Beef patty with cheese, lettuce, tomato, and onion."
+    }
+  ],
+
+  "Seafood": [
+    {
+      "name": "Fish and Chips",
+      "half_price": 899,
+      "full_price": 1299,
+      "description": "Fried fish fillet with crispy fries."
+    }
+  ],
+
+  "Dessert": [
+    {
+      "name": "Chocolate Cake",
+      "half_price": 349,
+      "full_price": 549,
+      "description": "Moist chocolate cake with chocolate frosting."
+    }
+  ],
+
+  "South Indian": [
+    {
+      "name": "Sambhar",
+      "half_price": 79.0,
+      "full_price": 129.0,
+      "description": "Traditional South Indian lentil curry with vegetables, served hot with rice or dosa."
+    }
+  ],
+
+  "Water": [
+    {
+      "name": "Mineral Water",
+      "half_price": 20,
+      "full_price": 30,
+      "description": "Bottled purified mineral water."
+    },
+    {
+      "name": "Sparkling Water",
+      "half_price": 35,
+      "full_price": 50,
+      "description": "Carbonated sparkling water."
+    }
+  ],
+
+  "Tea & Coffee": [
+    {
+      "name": "Masala Tea",
+      "half_price": 30,
+      "full_price": 50,
+      "description": "Traditional Indian spiced tea."
+    },
+    {
+      "name": "Espresso",
+      "half_price": 80,
+      "full_price": 120,
+      "description": "Strong black coffee shot."
+    },
+    {
+      "name": "Cappuccino",
+      "half_price": 120,
+      "full_price": 180,
+      "description": "Coffee with steamed milk foam."
+    }
+  ],
+
+  "Soft Drinks": [
+    {
+      "name": "Pepsi",
+      "half_price": 40,
+      "full_price": 70,
+      "description": "Refreshing cold Pepsi soda."
+    },
+    {
+      "name": "Coca-Cola",
+      "half_price": 40,
+      "full_price": 70,
+      "description": "Classic Coca-Cola soda."
+    }
+  ],
+
+  "Starters": [
+    {
+      "name": "French Fries",
+      "half_price": 100,
+      "full_price": 150,
+      "description": "Crispy fried potato sticks."
+    },
+    {
+      "name": "Paneer Tikka",
+      "half_price": 180,
+      "full_price": 270,
+      "description": "Grilled cottage cheese cubes with spices."
+    }
+  ],
+
+  "Veg Main Course": [
+    {
+      "name": "Paneer Butter Masala",
+      "half_price": 220,
+      "full_price": 350,
+      "description": "Cottage cheese cooked in rich tomato gravy."
+    },
+    {
+      "name": "Dal Tadka",
+      "half_price": 150,
+      "full_price": 220,
+      "description": "Yellow lentils tempered with spices."
+    }
+  ],
+
+  "Non-Veg Main Course": [
+    {
+      "name": "Butter Chicken",
+      "half_price": 250,
+      "full_price": 400,
+      "description": "Creamy tomato chicken curry."
+    },
+    {
+      "name": "Fish Curry",
+      "half_price": 280,
+      "full_price": 450,
+      "description": "Spicy fish cooked in coconut gravy."
+    }
+  ],
+
+  "Fast Food": [
+    {
+      "name": "Cheeseburger",
+      "half_price": 150,
+      "full_price": 250,
+      "description": "Beef patty with cheese and veggies."
+    },
+    {
+      "name": "Veg Sandwich",
+      "half_price": 100,
+      "full_price": 160,
+      "description": "Mixed veggies in toasted bread."
+    }
+  ]
+}
