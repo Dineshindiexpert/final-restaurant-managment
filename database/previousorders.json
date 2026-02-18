@@ -1,0 +1,48 @@
+[
+    {
+        "order_id": "O001",
+        "mobile": "9876543210",
+        "items": [
+            {
+                "dish": "Masala Tea",
+                "portion": "full",
+                "quantity": 2,
+                "price": 50
+            },
+            {
+                "dish": "Paneer Butter Masala",
+                "portion": "half",
+                "quantity": 1,
+                "price": 220
+            }
+        ],
+        "base_total": 320,
+        "gst": 48,
+        "total_price": 368,
+        "status": "completed",
+        "datetime": "2025-07-30 14:20:01"
+    },
+    {
+        "order_id": "O002",
+        "mobile": "9123456789",
+        "items": [
+            {
+                "dish": "Cheeseburger",
+                "portion": "full",
+                "quantity": 1,
+                "price": 849
+            },
+            {
+                "dish": "Pepsi",
+                "portion": "half",
+                "quantity": 2,
+                "price": 40
+            }
+        ],
+        "base_total": 929,
+        "gst": 139.35,
+        "total_price": 1068.35,
+        "status": "completed",
+        "datetime": "2025-07-30 15:05:33"
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {"table_id": "1", "seats": 2},
+
+    {"table_id": "2", "seats": 2},
+
+    {"table_id": "3", "seats": 2},
+
+    {"table_id": "4", "seats": 2},
+
+    {"table_id": "5", "seats": 2},
+
+
+    {"table_id": "6", "seats": 2},
+
+    {"table_id": "7", "seats": 2},
+
+    {"table_id": "8", "seats": 4},
+
+    {"table_id": "9", "seats": 4},
+
+    {"table_id": "10", "seats": 4},
+
+    {"table_id": "11", "seats": 4},
+
+    {"table_id": "12", "seats": 4},
+
+    {"table_id": "13", "seats": 6},
+
+    {"table_id": "14", "seats": 6},
+
+    {"table_id": "15", "seats": 6},
+
+    {"table_id": "16", "seats": 6},
+
+    {"table_id": "17", "seats": 8},
+
+    {"table_id": "18", "seats": 8},
+
+    {"table_id": "19", "seats": 10},
+    
+    {"table_id": "20", "seats": 10}
+]

@@ -1,0 +1,317 @@
+[
+    {
+        "order_id": "O001",
+        "mobile": "9876543210",
+        "items": [
+            {
+                "dish": "Masala Tea",
+                "portion": "full",
+                "quantity": 2,
+                "price": 50
+            },
+            {
+                "dish": "Paneer Butter Masala",
+                "portion": "half",
+                "quantity": 1,
+                "price": 220
+            }
+        ],
+        "base_total": 320,
+        "gst": 48,
+        "total_price": 368,
+        "status": "pending",
+        "datetime": "2025-07-30 14:20:01"
+    },
+    {
+        "order_id": "O002",
+        "mobile": "9123456789",
+        "items": [
+            {
+                "dish": "Cheeseburger",
+                "portion": "full",
+                "quantity": 1,
+                "price": 849
+            },
+            {
+                "dish": "Pepsi",
+                "portion": "half",
+                "quantity": 2,
+                "price": 40
+            }
+        ],
+        "base_total": 929,
+        "gst": 139.35,
+        "total_price": 1068.35,
+        "status": "completed",
+        "datetime": "2025-07-30 15:05:33"
+    },
+    {
+        "order_id": "O003",
+        "mobile": "9988776655",
+        "items": [
+            {
+                "dish": "Fish Curry",
+                "portion": "full",
+                "quantity": 1,
+                "price": 450
+            },
+            {
+                "dish": "Gulab Jamun",
+                "portion": "half",
+                "quantity": 1,
+                "price": 100
+            },
+            {
+                "dish": "Mineral Water",
+                "portion": "full",
+                "quantity": 1,
+                "price": 30
+            }
+        ],
+        "base_total": 580,
+        "gst": 87,
+        "total_price": 667,
+        "status": "completed",
+        "datetime": "2025-07-30 13:55:11"
+    },
+    {
+        "order_id": "O004",
+        "mobile": "9000012345",
+        "items": [
+            {
+                "dish": "Espresso",
+                "portion": "half",
+                "quantity": 1,
+                "price": 80
+            }
+        ],
+        "base_total": 80,
+        "gst": 12,
+        "total_price": 92,
+        "status": "canceled",
+        "datetime": "2025-07-30 10:00:00"
+    },
+    {
+        "order_id": "O005",
+        "mobile": "9896031541",
+        "items": [
+            {
+                "dish": "Pepsi",
+                "portion": "half",
+                "quantity": 2,
+                "price": 40
+            }
+        ],
+        "status": "completed",
+        "base_total": 80,
+        "gst": 12.0,
+        "total_price": 92.0,
+        "datetime": "2025-07-30 14:50:38"
+    },
+    {
+        "order_id": "O006",
+        "mobile": "7015917626",
+        "items": [
+            {
+                "dish": "Cheeseburger",
+                "portion": "full",
+                "quantity": 2,
+                "price": 849
+            },
+            {
+                "dish": "Coca-Cola",
+                "portion": "full",
+                "quantity": 1,
+                "price": 70
+            },
+            {
+                "dish": "Masala Tea",
+                "portion": "full",
+                "quantity": 1,
+                "price": 50
+            },
+            {
+                "dish": "French Fries",
+                "portion": "full",
+                "quantity": 1,
+                "price": 150
+            }
+        ],
+        "status": "pending",
+        "base_total": 1968,
+        "gst": 295.2,
+        "total_price": 2263.2,
+        "datetime": "2025-07-30 15:01:53"
+    },
+    {
+        "order_id": "O007",
+        "mobile": "9896031541",
+        "items": [
+            {
+                "dish": "Cheeseburger",
+                "portion": "full",
+                "quantity": 2,
+                "price": 849
+            }
+        ],
+        "status": "pending",
+        "base_total": 1698,
+        "gst": 254.7,
+        "total_price": 1952.7,
+        "datetime": "2025-07-31 08:38:03"
+    },
+    {
+        "order_id": "O008",
+        "mobile": "7015917626",
+        "items": [
+            {
+                "dish": "Paneer Tikka",
+                "portion": "full",
+                "quantity": 2,
+                "price": 270
+            },
+            {
+                "dish": "Coca-Cola",
+                "portion": "full",
+                "quantity": 1,
+                "price": 70
+            }
+        ],
+        "status": "pending",
+        "base_total": 610,
+        "gst": 91.5,
+        "total_price": 701.5,
+        "datetime": "2025-07-31 10:45:51"
+    },
+    {
+        "order_id": "O009",
+        "mobile": "9896031541",
+        "items": [
+            {
+                "dish": "White Sos Pasta",
+                "portion": "half",
+                "quantity": 1,
+                "price": 1500
+            }
+        ],
+        "status": "pending",
+        "base_total": 1500,
+        "gst": 225.0,
+        "total_price": 1725.0,
+        "datetime": "2025-07-31 16:56:59"
+    },
+    {
+        "order_id": "O010",
+        "mobile": "0000000000",
+        "items": [
+            {
+                "dish": "Sambhar",
+                "portion": "full",
+                "quantity": 2,
+                "price": 129.0
+            }
+        ],
+        "status": "pending",
+        "base_total": 258.0,
+        "gst": 38.699999999999996,
+        "total_price": 296.7,
+        "datetime": "2025-08-01 17:19:40"
+    },
+    {
+        "order_id": "O011",
+        "mobile": "9896031541",
+        "items": [
+            {
+                "dish": "Tomato Soup",
+                "portion": "half",
+                "quantity": 2,
+                "price": 299
+            }
+        ],
+        "status": "pending",
+        "base_total": 598,
+        "gst": 89.7,
+        "total_price": 687.7,
+        "datetime": "2025-08-03 18:44:23"
+    },
+    {
+        "order_id": "O012",
+        "mobile": "9896031541",
+        "items": [
+            {
+                "dish": "Dal Tadka",
+                "portion": "half",
+                "quantity": 1,
+                "price": 150
+            }
+        ],
+        "status": "pending",
+        "base_total": 150,
+        "gst": 22.5,
+        "total_price": 172.5,
+        "datetime": "2025-08-03 19:07:11"
+    },
+    {
+        "order_id": "O013",
+        "mobile": "9988776655",
+        "items": [
+            {
+                "dish": "Masala Tea",
+                "portion": "half",
+                "quantity": 2,
+                "price": 30
+            }
+        ],
+        "status": "pending",
+        "base_total": 60,
+        "gst": 9.0,
+        "total_price": 69.0,
+        "datetime": "2025-08-03 19:45:16"
+    },
+    {
+        "order_id": "O014",
+        "mobile": "9896031541",
+        "items": [
+            {
+                "dish": "Cheeseburger",
+                "portion": "full",
+                "quantity": 2,
+                "price": 849
+            },
+            {
+                "dish": "Coca-Cola",
+                "portion": "full",
+                "quantity": 1,
+                "price": 70
+            }
+        ],
+        "status": "pending",
+        "base_total": 1768,
+        "gst": 318.24,
+        "total_price": 2086.24,
+        "datetime": "2025-08-05 16:31:19"
+    },
+    {
+        "order_id": "O015",
+        "mobile": "9896031544",
+        "items": [
+            {
+                "dish": "Mineral Water",
+                "portion": "full",
+                "quantity": 2,
+                "price": 30
+            },
+            {
+                "dish": "Pepperoni Pizza",
+                "portion": "half",
+                "quantity": 3,
+                "price": 699
+            }
+        ],
+        "status": "completed",
+        "base_total": 2157,
+        "gst": 388.26,
+        "total_price": 2545.26,
+        "datetime": "2025-08-05 16:53:08"
+    }
+]
